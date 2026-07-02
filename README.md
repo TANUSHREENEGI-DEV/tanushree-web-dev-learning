@@ -1,12 +1,12 @@
-# 📚 My Web Development Learning Journey
+# My Web Development Learning Journey
 
 This is where I'm putting down everything I've learned so far. Not just finished assignments, but the actual concepts, in simple words, the way I understood them.
 
 ---
 
-# 🚀 Projects
+# Projects
 
-## 🌐 1. HTTP Under the Hood
+## 1. HTTP Under the Hood
 
 Live Demo: https://tanushreenegi-dev.github.io/http-under-the-hood/
 
@@ -108,7 +108,7 @@ The status code is the part I check the most now when something goes wrong. Befo
 
 ---
 
-## 📄 2. Resume Website (Pure HTML)
+## 2. Resume Website (Pure HTML)
 
 Live Demo: https://tanushreenegi-dev.github.io/resume/
 
@@ -154,7 +154,7 @@ So I stuck to proper tags like section, article, and header instead of using the
 
 ---
 
-## 🎨 3. Resume (HTML + CSS)
+## 3. Resume (HTML + CSS)
 
 Live Demo: https://tanushreenegi-dev.github.io/Personal-portfolio/resume.html
 
@@ -278,7 +278,7 @@ Media query:
 
 ---
 
-## 🧩 4. Personal Portfolio
+## 4. Personal Portfolio
 
 Live Demo: https://tanushreenegi-dev.github.io/Personal-portfolio/
 
@@ -288,7 +288,7 @@ Building this made me realize writing code is only part of it. Organizing files 
 
 ---
 
-# 🔧 Git & GitHub
+# Git & GitHub
 
 Git tracks changes to my code over time so I can go back if something breaks.
 GitHub is where I host my Git repos online.
@@ -326,7 +326,7 @@ GitHub
 
 ---
 
-# 🌍 Hosting with GitHub Pages
+# Hosting with GitHub Pages
 
 GitHub Pages hosts static sites for free, straight from a repo.
 
@@ -357,14 +357,14 @@ If index.html was buried inside another folder instead of sitting at the root, G
 
 ---
 
-# 😅 Things I struggled with
+# Things I struggled with
 
 - Mixing up padding and margin, more times than I'd like to admit
 - Not understanding why my flex items weren't aligning, until I realised I forgot to set display:flex on the parent, not the children
 - Thinking one 404 error meant my whole website was broken, when it was just one missing image path
 - Confusing GET and POST when I first read about them, since both just felt like "sending something to the server" to me at the time
 
-# 💡 Biggest Learnings
+# Biggest Learnings
 
 - Clean code matters more than a lot of code
 - One missing tag or wrong file path can break the whole page
@@ -374,7 +374,7 @@ If index.html was buried inside another folder instead of sitting at the root, G
 
 ---
 
-# 🔭 What's Next
+# What's Next
 
 - JavaScript
 - DOM Manipulation
@@ -385,4 +385,4 @@ If index.html was buried inside another folder instead of sitting at the root, G
 
 ---
 
-This repo is a work in progress. I'll keep adding to it as I learn more. ⭐
+This repo is a work in progress. I'll keep adding to it as I learn more.
