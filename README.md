@@ -24,27 +24,37 @@ You don't go into the kitchen yourself. You tell the waiter, the waiter goes and
 ### What happens when you hit Enter
 
 **Step 1: DNS Lookup**
-Browser finds the site's IP address (this is DNS)
+Browser finds the site's IP address (this is DNS). This confused me at first since I didn't get why the browser needs an "address" when I already typed the website name. Turns out the name is just for humans to remember easily, computers actually talk using IP addresses (just numbers). DNS is basically a phonebook - give it a name, get back the number. If the browser already knows it from before (cached), it skips this step.
+
+⬇
 
 **Step 2: Send Request**
-Browser sends a request to that address
+Browser sends a request to that address. This is where it actually reaches out and asks the server for something, using HTTP.
+
+⬇
 
 **Step 3: Server Processes It**
-Server receives the request and figures out what to do with it
+Server receives the request and figures out what to do with it - finding the right file, checking if it exists, running backend code if needed.
+
+⬇
 
 **Step 4: Server Sends Response**
-Server sends back a response (status code + content)
+Server sends back a response with a status code, headers, and the actual content. This is where you find out if it worked (200) or something went wrong (like a 404).
+
+⬇
 
 **Step 5: Browser Downloads HTML**
-Browser gets the actual HTML document first
+Browser gets the actual HTML document first, since that's the base structure everything else depends on.
+
+⬇
 
 **Step 6: Browser Downloads Everything Else**
-Browser goes back for CSS, images, fonts, scripts etc, one by one
+Browser goes back for CSS, images, fonts, scripts etc, one by one, since these aren't part of the first file, just referenced inside it.
+
+⬇
 
 **Step 7: Page Renders**
-Everything comes together and shows up on screen
-
-The DNS part confused me at first because I didn't understand why the browser needs an "address" when I already typed the website name. Turns out the name (like google.com) is just for humans to remember easily. Computers actually talk to each other using IP addresses, which are just numbers. So DNS is basically a big phonebook - you give it a name, it gives you back the number. Once the browser has that number, it can actually connect to the server. If it already knows the address from before (cached), it skips this step, which is part of why some sites load faster the second time you visit.
+Everything comes together and shows up on screen. By this point most of the actual work already happened behind the scenes.
 
 ### HTTP Request
 
@@ -134,6 +144,14 @@ Why it matters:
 - Search engines understand your page better (SEO)
 - It's easier to read your own code later
 
+### Why I didn't just use div, span, or table for everything
+
+- div is a generic block with no meaning attached. Using it everywhere makes the code hard to read later, since you can't tell what any div actually is without checking class names.
+- span is the same idea but inline, meant for styling small bits of text. Using it for bigger content breaks the layout since it doesn't take a full line by default.
+- table was never meant for page layout, only for actual data like a spreadsheet. Old sites used tables to build layouts, but it makes the HTML messy, breaks accessibility (screen readers try to read it as data), and doesn't resize well on different screens.
+
+So I stuck to proper tags like section, article, and header instead of using these three as shortcuts.
+
 ---
 
 ## 🎨 3. Resume (HTML + CSS)
@@ -194,6 +212,23 @@ I kept mixing up padding and margin. Padding is space inside the border, margin 
 
 Used for aligning things in a row or column. Before learning flexbox I was trying to align things using margins and it kept breaking on different screen sizes. With flexbox I just set display:flex on the parent, and then I can control how the children line up without doing manual math for spacing.
 
+```
+Flex container (display: flex)
++------------------------------------------+
+|  [Item 1]   [Item 2]   [Item 3]           |
++------------------------------------------+
+        justify-content → spacing this way
+```
+
+```
+flex-direction: column
++------------+
+|  [Item 1]  |
+|  [Item 2]  |
+|  [Item 3]  |
++------------+
+```
+
 Properties: display:flex, justify-content, align-items, flex-direction, gap
 
 - justify-content controls spacing along the main direction (left to right usually)
@@ -204,6 +239,16 @@ Properties: display:flex, justify-content, align-items, flex-direction, gap
 ### Grid
 
 Flexbox is good for one row or one column at a time. Grid is for when you need both rows and columns together, like a gallery of cards or a dashboard layout. I used it in the portfolio project to arrange the project cards evenly instead of them stacking randomly.
+
+```
+Grid container (display: grid)
++-----------+-----------+-----------+
+| Item 1    | Item 2    | Item 3    |
++-----------+-----------+-----------+
+| Item 4    | Item 5    | Item 6    |
++-----------+-----------+-----------+
+   grid-template-columns: 1fr 1fr 1fr
+```
 
 ### Position
 
@@ -294,19 +339,21 @@ Steps:
 5. Save
 6. GitHub gives you a live link
 
----
+### Why folder structure matters here
 
-# 📁 Folder Structure
+GitHub Pages looks for an index.html file to know what to show as the homepage. If index.html isn't sitting in the right place (usually the root of the repo, or inside a docs folder if that's what's selected in settings), the site either won't load or shows a 404 instead of your actual page. This is something I ran into directly - my project folder needed to look like this for the live link to actually work:
 
 ```
-project
-├── index.html
+project (root)
+├── index.html        ← this is what loads at the main link
 ├── resume.html
 ├── style.css
 ├── images/
 ├── assets/
 └── README.md
 ```
+
+If index.html was buried inside another folder instead of sitting at the root, GitHub Pages wouldn't find it automatically.
 
 ---
 
