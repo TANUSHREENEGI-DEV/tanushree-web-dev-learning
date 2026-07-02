@@ -23,23 +23,26 @@ You don't go into the kitchen yourself. You tell the waiter, the waiter goes and
 
 ### What happens when you hit Enter
 
-```
-Type a URL and press Enter
-      |
+**Step 1: DNS Lookup**
 Browser finds the site's IP address (this is DNS)
-      |
+
+**Step 2: Send Request**
 Browser sends a request to that address
-      |
-Server processes it
-      |
-Server sends back a response
-      |
-Browser downloads the HTML
-      |
-Browser downloads CSS, images, fonts etc
-      |
-Page shows up on screen
-```
+
+**Step 3: Server Processes It**
+Server receives the request and figures out what to do with it
+
+**Step 4: Server Sends Response**
+Server sends back a response (status code + content)
+
+**Step 5: Browser Downloads HTML**
+Browser gets the actual HTML document first
+
+**Step 6: Browser Downloads Everything Else**
+Browser goes back for CSS, images, fonts, scripts etc, one by one
+
+**Step 7: Page Renders**
+Everything comes together and shows up on screen
 
 The DNS part confused me at first because I didn't understand why the browser needs an "address" when I already typed the website name. Turns out the name (like google.com) is just for humans to remember easily. Computers actually talk to each other using IP addresses, which are just numbers. So DNS is basically a big phonebook - you give it a name, it gives you back the number. Once the browser has that number, it can actually connect to the server. If it already knows the address from before (cached), it skips this step, which is part of why some sites load faster the second time you visit.
 
