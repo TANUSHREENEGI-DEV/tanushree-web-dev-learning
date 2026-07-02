@@ -28,33 +28,64 @@ Browser finds the site's IP address (this is DNS). This confused me at first sin
 
 ⬇
 
-**Step 2: Send Request**
+**Step 2: TCP Connection**
+Before any data can be sent, the browser and server set up a TCP connection - basically a reliable channel between the two, so data doesn't get lost or arrive out of order. Think of it like both sides agreeing "ok, we're connected, go ahead."
+
+⬇
+
+**Step 3: TLS Handshake**
+If the site uses HTTPS (which most do now), there's one more step before anything is sent - the TLS handshake. This is where the browser and server agree on how to encrypt everything, and the server proves its identity using a certificate. This is the part that makes the padlock icon show up in the address bar. I used to think http vs https was just a small detail, but this handshake is literally what keeps your data private from anyone snooping on the network.
+
+⬇
+
+**Step 4: Send Request**
 Browser sends a request to that address. This is where it actually reaches out and asks the server for something, using HTTP.
 
 ⬇
 
-**Step 3: Server Processes It**
+**Step 5: Server Processes It**
 Server receives the request and figures out what to do with it - finding the right file, checking if it exists, running backend code if needed.
 
 ⬇
 
-**Step 4: Server Sends Response**
+**Step 6: Server Sends Response**
 Server sends back a response with a status code, headers, and the actual content. This is where you find out if it worked (200) or something went wrong (like a 404).
 
 ⬇
 
-**Step 5: Browser Downloads HTML**
+**Step 7: Browser Downloads HTML**
 Browser gets the actual HTML document first, since that's the base structure everything else depends on.
 
 ⬇
 
-**Step 6: Browser Downloads Everything Else**
+**Step 8: Browser Downloads Everything Else**
 Browser goes back for CSS, images, fonts, scripts etc, one by one, since these aren't part of the first file, just referenced inside it.
 
 ⬇
 
-**Step 7: Page Renders**
+**Step 9: Page Renders**
 Everything comes together and shows up on screen. By this point most of the actual work already happened behind the scenes.
+
+Here's the same flow as a diagram:
+
+```mermaid
+sequenceDiagram
+    participant Browser
+    participant DNS
+    participant Server
+
+    Browser->>DNS: Where does this website live?
+    DNS-->>Browser: Here's the IP address
+    Browser->>Server: TCP Connection request
+    Server-->>Browser: Connection established
+    Browser->>Server: TLS Handshake (agree on encryption)
+    Server-->>Browser: Secure channel ready
+    Browser->>Server: HTTP Request (GET /index.html)
+    Server-->>Browser: HTTP Response (HTML + status code)
+    Browser->>Server: Request CSS, images, fonts
+    Server-->>Browser: Send those back too
+    Note over Browser: Page is now fully loaded
+```
 
 ### HTTP Request
 
@@ -159,6 +190,12 @@ So I stuck to proper tags like section, article, and header instead of using the
 Live Demo: https://tanushreenegi-dev.github.io/Personal-portfolio/resume.html
 
 Same content as project 2, but now styled. If HTML is the skeleton, CSS is what makes it actually look like something - colors, fonts, spacing, layout.
+
+```mermaid
+flowchart LR
+    A[HTML - structure] --> B[CSS - styling]
+    B --> C[Same content, now looking intentional]
+```
 
 ### CSS Syntax
 
