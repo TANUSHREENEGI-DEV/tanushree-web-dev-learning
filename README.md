@@ -1,216 +1,143 @@
 # 📚 My Web Development Learning Journey
 
-Welcome! 👋
-
-This repository is a record of everything I've learned so far while learning web development. I didn't want this to just be a folder of finished assignments — I wanted a place where I explain things in my **own words**, simply enough that someone who has never coded before could read it and actually understand what's going on.
-
-If you're a complete beginner, this README is written for you.
+This is where I'm putting down everything I've learned so far. Not just finished assignments, but the actual concepts, in simple words, the way I understood them.
 
 ---
 
-## 🗂️ Table of Contents
+# 🚀 Projects
 
-1. [HTTP Under the Hood](#1-http-under-the-hood)
-2. [Resume Website — Pure HTML](#2-resume-website--pure-html)
-3. [Resume — HTML + CSS](#3-resume--html--css)
-4. [Personal Portfolio](#4-personal-portfolio)
-5. [Git & GitHub](#-git--github)
-6. [Hosting with GitHub Pages](#-hosting-with-github-pages)
-7. [Folder Structure](#-folder-structure)
-8. [Biggest Learnings](#-biggest-learnings)
-9. [What's Next](#-whats-next)
+## 🌐 1. HTTP Under the Hood
 
----
+Live Demo: https://tanushreenegi-dev.github.io/http-under-the-hood/
 
-# 🚀 Projects Completed
+Before this, I thought a website just "appears" when you press Enter. Turns out there's a whole back and forth happening between the browser and a server, and HTTP is the set of rules they follow to talk to each other.
 
-## 1. HTTP Under the Hood
+The way I understood it - think of ordering food at a restaurant.
 
-🔗 **Live Demo:** https://tanushreenegi-dev.github.io/http-under-the-hood/
+- You are the browser
+- The waiter is HTTP
+- The kitchen is the server
+- The food is the response
 
-### What I learned
+You don't go into the kitchen yourself. You tell the waiter, the waiter goes and tells the kitchen, and brings the food back. HTTP is just the messenger carrying requests and responses back and forth.
 
-Before I started learning web development, I genuinely thought a website "just appears" the moment you press Enter. Turns out, in that split second, your browser and a server somewhere else in the world have an entire conversation — and **HTTP is the language they speak.**
+### What happens when you hit Enter
 
-**HTTP (HyperText Transfer Protocol)** is simply the set of rules that a browser (the *client*) and a server follow to ask for and receive information.
-
-**Here's the analogy that made it click for me — ordering food at a restaurant:**
-
-| Restaurant | Website |
-|---|---|
-| You | The browser (client) |
-| The waiter | HTTP |
-| The kitchen | The server |
-| The food that arrives | The response |
-
-You don't walk into the kitchen and cook your own food. You tell the waiter what you want, the waiter carries that request to the kitchen, and then carries the finished food back to you. The waiter doesn't decide *what* to cook — they just carry the message reliably, both ways. That's exactly what HTTP does between your browser and a server.
-
-### Request Flow — what happens when you hit Enter
-
-```text
-User
- │
- ▼
-Types a URL and hits Enter
- │
- ▼
-Browser checks DNS (finds the website's IP address)
- │
- ▼
-Browser sends an HTTP Request to that address
- │
- ▼
-Server receives and processes the request
- │
- ▼
-Server sends back an HTTP Response
- │
- ▼
+```
+Type a URL and press Enter
+      |
+Browser finds the site's IP address (this is DNS)
+      |
+Browser sends a request to that address
+      |
+Server processes it
+      |
+Server sends back a response
+      |
 Browser downloads the HTML
- │
- ▼
-Browser downloads CSS, images, fonts, scripts
- │
- ▼
-Webpage appears on screen
+      |
+Browser downloads CSS, images, fonts etc
+      |
+Page shows up on screen
 ```
 
-Another way I noted down the same idea, step by step:
+The DNS part confused me at first because I didn't understand why the browser needs an "address" when I already typed the website name. Turns out the name (like google.com) is just for humans to remember easily. Computers actually talk to each other using IP addresses, which are just numbers. So DNS is basically a big phonebook - you give it a name, it gives you back the number. Once the browser has that number, it can actually connect to the server. If it already knows the address from before (cached), it skips this step, which is part of why some sites load faster the second time you visit.
 
-```text
-Browser  ---- "Where does example.com live?" ---->  DNS
-Browser  <----------- Here's the IP address --------  DNS
+### HTTP Request
 
-Browser  ------------- GET /index.html ------------>  Server
-Browser  <------- HTML, status code, headers -------  Server
+A request is just the browser asking for something. For example:
 
-Browser  --- more requests (CSS, images, fonts) --->  Server
-Browser  <---------- more responses ----------------  Server
-
-Page is now fully loaded on screen
 ```
-
-### HTTP Request — you asking for something
-
-An HTTP request is basically you telling the server *what you want and how you want it.*
-
-```text
 GET /index.html HTTP/1.1
 ```
 
-This one line already tells the server three things: the **method** (what kind of action), the **path** (which resource), and the **protocol version**.
+This line tells the server what method it's using, what it wants, and which version of HTTP.
 
-**Common HTTP methods**, explained the way I'd explain it to a friend:
+Methods I learned:
 
-| Method | What it really means | Everyday example |
-|--------|----------------------|-------------------|
-| `GET` | "Just show me this" | Opening a blog post |
-| `POST` | "Here's new data, save it" | Submitting a signup form |
-| `PUT` | "Replace this with what I'm sending" | Updating your profile info |
-| `DELETE` | "Remove this" | Deleting a comment |
+| Method | Meaning |
+|--------|---------|
+| GET | get/show me something |
+| POST | send new data |
+| PUT | update existing data |
+| DELETE | remove something |
 
-### HTTP Response — the server talking back
+At first I thought GET is the only one that matters since it's what happens when you just open a page. But then I realized every time you submit a form, log in, upload something, or delete a post, it's using one of these other methods behind the scenes. So the browser isn't just "reading" websites, it's also constantly sending data using these different methods, just not something you usually see.
 
-Every response the server sends has three parts:
+### HTTP Response
 
-- **Status Code** — a short number that summarizes what happened
-- **Headers** — extra metadata (like what type of content is coming)
-- **Body** — the actual content (HTML, JSON, an image, etc.)
+The response has a status code, some headers, and the actual content (body).
 
-```text
+```
 200 OK
 Content-Type: text/html
 ```
 
-### Common Status Codes (the ones I actually keep running into)
+The status code is the part I check the most now when something goes wrong. Before this I used to just see a blank page or an error and not know what was happening. Now if I open DevTools and see a 404, I know the file path is probably wrong. If I see a 500, I know it's a server side problem, not something in my HTML/CSS. The headers are extra info that comes along with the response, like what type of content it is, so the browser knows how to handle it (like whether to display it as a webpage, download it as a file, etc).
 
-| Code | Meaning | How I remember it |
-|------|----------|--------------------|
-| 200 | Success | "Here you go, all good" |
-| 301 | Moved Permanently | "We packed up and moved, here's our new address" |
-| 400 | Bad Request | "I don't understand what you're asking for" |
-| 401 | Unauthorized | "You need to log in first" |
-| 403 | Forbidden | "I know who you are, but you still can't come in" |
-| 404 | Not Found | "That page doesn't exist" |
-| 500 | Internal Server Error | "It's not you, it's me — I broke" |
+### Status codes I keep seeing
 
-### Key Things I Learned
+| Code | Meaning |
+|------|---------|
+| 200 | success |
+| 301 | moved permanently |
+| 400 | bad request |
+| 401 | unauthorized |
+| 403 | forbidden |
+| 404 | not found |
+| 500 | server error |
 
-- **HTTP is stateless.** The server doesn't "remember" your last request. Every single request has to carry all the information it needs, on its own.
-- **One webpage ≠ one request.** The very first request only gets you the HTML. Everything else — CSS, JavaScript, fonts, images — arrives through its *own separate* request.
-- **A single page can trigger dozens (sometimes hundreds) of requests.** I genuinely assumed one request = one website, until I opened DevTools and watched the Network tab fill up in real time.
+### Things I learned
 
-> **Common Mistake I Made:** I thought loading a website was one single trip between browser and server. It's actually more like the waiter making dozens of trips back and forth — one for the HTML, one for every image, one for every stylesheet, one for every script — all happening in the background in milliseconds.
+- HTTP is stateless - meaning the server doesn't remember your last request, every request stands on its own.
+- One webpage load is not one request. The HTML comes first, then CSS, JS, images, fonts all come as separate requests.
+- I thought loading a site was one request. When I opened DevTools and watched the network tab, I saw a single page can trigger dozens of requests, sometimes more.
 
 ---
 
-## 2. Resume Website — Pure HTML
+## 📄 2. Resume Website (Pure HTML)
 
-🔗 **Live Demo:** https://tanushreenegi-dev.github.io/resume/
+Live Demo: https://tanushreenegi-dev.github.io/resume/
 
-### What I learned
+No CSS at all in this one, on purpose. The point was to only focus on HTML and understand it properly instead of relying on styling to fix things.
 
-This project had **zero CSS on purpose.** The goal was to understand HTML on its own, without anything else to lean on.
+HTML is basically the skeleton of a page. It decides what each piece of content is, not how it looks.
 
-Here's how I think about it now: **HTML is the skeleton of a webpage.** It doesn't decide colors or spacing — it decides *what each piece of content is* and *where it belongs* in the structure. A heading is a heading. A paragraph is a paragraph. A list is a list. Nothing more, nothing less.
+Tags I used:
 
-**Tags I practiced with:**
-
-| Tag | What it's for |
-|-----|----------------|
-| `<html>` | Wraps the entire page |
-| `<head>` | Holds information *about* the page (title, metadata) — not visible content |
-| `<body>` | Holds everything the visitor actually sees |
-| `<h1>` – `<h6>` | Headings, in order of importance |
-| `<p>` | A paragraph of text |
-| `<img>` | An image |
-| `<a>` | A link |
-| `<ul>` / `<ol>` / `<li>` | Unordered / ordered lists, and their items |
-| `<section>` / `<article>` | Group related content together |
-| `<footer>` | The bottom section of a page |
+- html, head, body
+- h1 to h6 for headings
+- p for paragraphs
+- img for images
+- a for links
+- ul, ol, li for lists
+- section, article for grouping content
+- footer
 
 ### Semantic HTML
 
-Early on, it's tempting to wrap *everything* in `<div>` because it always works. But `<div>` tells the browser nothing about what the content actually is — it's just a generic box.
+It's easy to just use div for everything, but div doesn't tell you what the content actually is. Semantic tags do:
 
-**Semantic elements**, on the other hand, describe their purpose:
+- header - top of the page
+- nav - the menu
+- main - the main content
+- section - a block of related content
+- article - self contained content
+- footer - bottom of the page
 
-```text
-<header>   → the top section of the page
-<nav>      → the navigation menu
-<main>     → the primary content of the page
-<section>  → a distinct block of related content
-<article>  → self-contained content (like a blog post)
-<footer>   → the bottom section of the page
-```
+Why it matters:
 
-**Why this matters** (this is the part that surprised me — you don't *see* the benefit, you only feel it later):
-
-- **Better accessibility** — screen readers use these tags to help visually impaired users navigate the page
-- **Better SEO** — search engines use this structure to understand what your page is actually about
-- **Easier to maintain** — six months from now, `<nav>` tells you instantly what that block is, `<div class="thing2">` doesn't
+- Screen readers use this structure, so it helps accessibility
+- Search engines understand your page better (SEO)
+- It's easier to read your own code later
 
 ---
 
-## 3. Resume — HTML + CSS
+## 🎨 3. Resume (HTML + CSS)
 
-🔗 **Live Demo:** https://tanushreenegi-dev.github.io/Personal-portfolio/resume.html
+Live Demo: https://tanushreenegi-dev.github.io/Personal-portfolio/resume.html
 
-### What CSS does
-
-If HTML is the skeleton, **CSS is the skin, the clothes, and the makeup.** Same underlying structure as Project 2 — but now it can control:
-
-- Colors
-- Fonts
-- Layout
-- Spacing
-- Animations
-- Responsiveness (how it looks on different screen sizes)
-
-```text
-HTML (the skeleton)  --->  styled by CSS (the skin)  --->  same content, now looking intentional
-structure & meaning                appearance & layout
-```
+Same content as project 2, but now styled. If HTML is the skeleton, CSS is what makes it actually look like something - colors, fonts, spacing, layout.
 
 ### CSS Syntax
 
@@ -220,7 +147,7 @@ selector {
 }
 ```
 
-For example:
+Example:
 
 ```css
 h1 {
@@ -228,193 +155,148 @@ h1 {
 }
 ```
 
-This says: "find every `<h1>` on the page, and make its text color pink."
+### Selectors
 
-### CSS Selectors
+| Type | Example | Targets |
+|------|---------|---------|
+| Element | p | every p tag |
+| Class | .card | elements with class="card" |
+| ID | #header | the element with id="header" |
+| Universal | * | everything |
+| Group | h1, h2 | h1 and h2 together |
+| Descendant | nav a | a tags inside nav |
 
-| Selector type | Example | Targets |
-|---|---|---|
-| Element | `p` | Every `<p>` tag |
-| Class | `.card` | Every element with `class="card"` |
-| ID | `#header` | The one element with `id="header"` |
-| Universal | `*` | Literally everything |
-| Group | `h1, h2` | Both `h1` and `h2` at once |
-| Descendant | `nav a` | Every `<a>` that's *inside* a `<nav>` |
+### Box Model
 
-### The Box Model
+This one confused me a lot at first. Every element is basically a box with content, padding, border, and margin around it.
 
-This was the single biggest "aha" moment of styling for me. **Every HTML element is secretly a rectangular box** — even things that don't look like boxes, like plain text.
-
-```text
-+--------------------------+
-|         Margin           |   ← space OUTSIDE the box, pushes other elements away
-|  +--------------------+  |
-|  |      Border        |  |   ← the box's visible edge
-|  | +---------------+  |  |
-|  | |    Padding    |  |  |   ← space INSIDE the box, between border and content
-|  | | +-----------+ |  |  |
-|  | | |  Content  | |  |  |   ← the actual text/image
-|  | | +-----------+ |  |  |
-|  | +---------------+  |  |
-|  +--------------------+  |
-+--------------------------+
+```
+margin (space outside the box)
+  border (the edge)
+    padding (space inside the box)
+      content (actual text/image)
 ```
 
-Most of my early spacing bugs came from mixing up **padding** (space inside the box) and **margin** (space outside the box) — they look similar in code but do opposite jobs.
+I kept mixing up padding and margin. Padding is space inside the border, margin is space outside it.
 
-### Display Property
+### Display values
 
-| Value | Behavior |
-|---|---|
-| `block` | Takes up the full width, starts on a new line |
-| `inline` | Only takes up as much width as its content, stays in line with text |
-| `inline-block` | Stays in line, but you can still set width/height |
-| `flex` | Turns on Flexbox layout (see below) |
-| `grid` | Turns on Grid layout (see below) |
+- block - full width, new line
+- inline - only as wide as content
+- inline-block - inline but you can set width/height
+- flex - flexbox layout
+- grid - grid layout
 
 ### Flexbox
 
-Flexbox is how I align things in a row (or column) without fighting the browser.
+Used for aligning things in a row or column. Before learning flexbox I was trying to align things using margins and it kept breaking on different screen sizes. With flexbox I just set display:flex on the parent, and then I can control how the children line up without doing manual math for spacing.
 
-```text
-+-----------------------------------+
-|  Item 1     Item 2     Item 3     |
-+-----------------------------------+
-```
+Properties: display:flex, justify-content, align-items, flex-direction, gap
 
-Properties I used constantly:
-
-- `display: flex` — turns the container into a flexbox
-- `justify-content` — spacing along the main direction (e.g. left to right)
-- `align-items` — alignment along the cross direction (e.g. top to bottom)
-- `flex-direction` — row or column
-- `gap` — consistent spacing between items, without needing margins on each one
+- justify-content controls spacing along the main direction (left to right usually)
+- align-items controls alignment the other way (top to bottom)
+- flex-direction switches between row and column
+- gap adds space between items without needing margin on each one separately
 
 ### Grid
 
-Where Flexbox is great for a single row or column, **Grid is for a full two-dimensional layout** — rows *and* columns at once.
-
-```text
-+-------+-------+
-| Box 1 | Box 2 |
-+-------+-------+
-| Box 3 | Box 4 |
-+-------+-------+
-```
+Flexbox is good for one row or one column at a time. Grid is for when you need both rows and columns together, like a gallery of cards or a dashboard layout. I used it in the portfolio project to arrange the project cards evenly instead of them stacking randomly.
 
 ### Position
 
-| Value | Behavior |
-|---|---|
-| `static` | Default — follows normal document flow |
-| `relative` | Positioned relative to where it *would* normally be |
-| `absolute` | Positioned relative to its nearest positioned parent, removed from normal flow |
-| `fixed` | Stays in the same spot on screen, even while scrolling |
-| `sticky` | Behaves normally until a scroll point, then "sticks" |
+- static - default
+- relative - relative to its normal position
+- absolute - relative to nearest positioned parent
+- fixed - stays in place even when scrolling
+- sticky - normal until a scroll point, then sticks
 
 ### Responsive Design
 
-A responsive website adjusts itself to look good on any screen — phone, tablet, laptop, or desktop.
+Website should look fine on phone, tablet, and desktop.
 
-Two things make this possible:
-
-**1. The viewport meta tag** — tells the browser not to zoom the page out to fit a "desktop-sized" layout on a phone:
+Viewport tag:
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
 
-**2. Media queries** — apply different CSS depending on screen size:
+Media query:
 
 ```css
 @media (max-width: 768px) {
-  /* styles that only apply on smaller screens */
+  /* styles for smaller screens */
 }
 ```
 
 ---
 
-## 4. Personal Portfolio
+## 🧩 4. Personal Portfolio
 
-🔗 **Live Demo:** https://tanushreenegi-dev.github.io/Personal-portfolio/
+Live Demo: https://tanushreenegi-dev.github.io/Personal-portfolio/
 
-This project is where everything from the projects above finally comes together in one real, multi-section site.
+This is where all of the above comes together in one full site - about section, project cards, contact section, navigation.
 
-**Features:**
-
-- Semantic HTML
-- CSS styling
-- Responsive layout
-- Navigation between sections
-- Project cards
-- A contact section
-- Custom visual design
-
-While building it, I understood something that no tutorial had really said out loud: **writing code is only one part of web development.** Organizing files sensibly, naming CSS classes so they actually mean something, and keeping code readable for *future me* turned out to matter just as much as making it work in the first place.
+Building this made me realize writing code is only part of it. Organizing files properly, naming things sensibly, keeping it readable matters just as much.
 
 ---
 
-## 🔧 Git & GitHub
+# 🔧 Git & GitHub
 
-**Git** is a version control system — it tracks every change I make to my code over time, so I can always go back if something breaks.
+Git tracks changes to my code over time so I can go back if something breaks.
+GitHub is where I host my Git repos online.
 
-**GitHub** is a website that hosts my Git repositories online, so my code isn't just sitting on my own laptop.
+### Basic workflow
 
-### Basic Workflow
-
-```text
-Working Directory   (the files you're editing)
-        │
-   git add
-        │
-Staging Area         (changes marked as "ready to save")
-        │
-   git commit
-        │
-Local Repository     (saved as a permanent snapshot, on your machine)
-        │
-   git push
-        │
-GitHub                (your snapshot is now backed up online)
+```
+Working Directory
+     |
+  git add
+     |
+Staging Area
+     |
+  git commit
+     |
+Local Repository
+     |
+  git push
+     |
+GitHub
 ```
 
-### Commands I actually use
+### Commands
 
-| Command | What it does |
-|---|---|
-| `git init` | Start tracking a folder with Git |
-| `git status` | See what's changed |
-| `git add .` | Stage all changes |
-| `git commit -m "message"` | Save a snapshot with a description |
-| `git push` | Upload commits to GitHub |
-| `git pull` | Download the latest changes from GitHub |
-| `git clone` | Copy an existing repository to your machine |
-| `git branch` | List or create branches |
-| `git checkout` | Switch between branches |
-| `git merge` | Combine changes from one branch into another |
+- git init - start tracking a folder
+- git status - see what's changed
+- git add . - stage changes
+- git commit -m "message" - save a snapshot
+- git push - upload to GitHub
+- git pull - download latest changes
+- git clone - copy a repo
+- git branch - list/create branches
+- git checkout - switch branches
+- git merge - combine branches
 
 ---
 
-## 🌐 Hosting with GitHub Pages
+# 🌍 Hosting with GitHub Pages
 
-GitHub Pages lets you host a static website — for free — directly from a GitHub repository. This is how every live demo linked in this README is actually online.
+GitHub Pages hosts static sites for free, straight from a repo.
 
-**Steps:**
+Steps:
 
-1. Push your code to a GitHub repository.
-2. Open the repository's **Settings**.
-3. Go to the **Pages** section.
-4. Choose the branch you want to publish.
-5. Save.
-6. GitHub generates a public link where your site is now live.
+1. Push code to GitHub
+2. Go to repo Settings
+3. Go to Pages
+4. Pick the branch
+5. Save
+6. GitHub gives you a live link
 
 ---
 
-## 📁 Folder Structure
+# 📁 Folder Structure
 
-```text
+```
 project
-│
 ├── index.html
 ├── resume.html
 ├── style.css
@@ -425,33 +307,32 @@ project
 
 ---
 
-## 💡 Biggest Learnings
+# 😅 Things I struggled with
 
-- Writing **clean** code matters more than writing a lot of code.
-- A single missing tag or wrong file path can break an entire page — the browser doesn't guess what you meant.
-- CSS becomes dramatically easier when the HTML underneath is already well-organized.
-- Git means I never have to be afraid of "breaking" my project — I can always go back to an earlier commit.
-- Building real projects has taught me more, faster, than just reading theory ever did.
+- Mixing up padding and margin, more times than I'd like to admit
+- Not understanding why my flex items weren't aligning, until I realised I forgot to set display:flex on the parent, not the children
+- Thinking one 404 error meant my whole website was broken, when it was just one missing image path
+- Confusing GET and POST when I first read about them, since both just felt like "sending something to the server" to me at the time
+
+# 💡 Biggest Learnings
+
+- Clean code matters more than a lot of code
+- One missing tag or wrong file path can break the whole page
+- CSS is way easier when the HTML underneath is organized properly
+- Git means I don't have to be scared of breaking something, I can always go back
+- Building actual projects taught me more than just reading theory
 
 ---
 
-## 🔭 What's Next
-
-Going forward, I want to learn:
+# 🔭 What's Next
 
 - JavaScript
 - DOM Manipulation
 - APIs
-- Responsive layouts, in more depth
+- Responsive design in more depth
 - React
-- Backend Development
+- Backend basics
 
 ---
 
-## 🙏 Final Thoughts
-
-This repository is more than a collection of assignments. It represents my progress — from building a plain, unstyled HTML page to putting together a responsive, multi-section portfolio, while actually understanding how browsers, servers, HTML, CSS, Git, and GitHub all fit together.
-
-I'll keep updating this as I learn new things.
-
-⭐ Thanks for reading this far!
+This repo is a work in progress. I'll keep adding to it as I learn more. ⭐
